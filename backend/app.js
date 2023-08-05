@@ -11,6 +11,10 @@ const {
 const auth = require('./middlewares/auth');
 const otherErrors = require('./middlewares/errors');
 const { NotFoundError } = require('./utils/errors');
+const { 
+  requestLogger,
+  errorLogger
+} = require('./middlewares/logger')
 
 const { PORT = 3000 } = process.env;
 
@@ -23,6 +27,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/mestodb', {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(requestLogger);
 
 app.post(
   '/signin',
@@ -56,6 +61,7 @@ app.use('/cards', require('./routes/cards'));
 
 app.use('*', (req, res, next) => next(new NotFoundError('Страница по указанному маршруту не найдена')));
 
+app.use(errorLogger);
 app.use(errors());
 app.use(otherErrors);
 
