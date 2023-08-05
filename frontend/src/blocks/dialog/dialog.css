@@ -1,0 +1,12 @@
+.dialog {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 64px auto 0;
+}
+
+@media screen and (max-width: 619px) {
+    .dialog {
+        margin: 40px auto 0;
+    }    
+}

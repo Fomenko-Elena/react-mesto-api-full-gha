@@ -1,0 +1,20 @@
+.header__navlink {
+    display: none;
+
+    font-size: 18px;
+    font-family: Inter;
+    line-height: 22px;
+    color: #FFFFFF;
+    transition: opacity 0.1s linear;
+    text-decoration: none;
+}
+
+.header__navlink:hover {
+    opacity: 0.6;
+}
+
+@media screen and (max-width: 767px) {
+    .header__navlink {
+        font-size: 18px;
+    }
+}

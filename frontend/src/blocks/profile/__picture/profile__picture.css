@@ -1,0 +1,7 @@
+.profile__picture {
+    position: relative;
+}
+
+.profile__picture:hover > .profile__overlay {
+    display: block;
+}

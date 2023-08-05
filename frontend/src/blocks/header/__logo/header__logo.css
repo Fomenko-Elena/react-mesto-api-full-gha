@@ -1,0 +1,16 @@
+.header__logo {
+    transition: color 0.1s linear;
+}
+
+@media screen and (max-width: 925px) {
+    .header__logo {
+        padding: 0 27px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .header__logo {
+        width: 103.74px;
+        height: 24.4px;
+    }
+}

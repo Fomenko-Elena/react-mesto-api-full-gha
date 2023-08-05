@@ -1,0 +1,25 @@
+.form__submit {
+    margin: 216px 0 0;
+
+    color: #000000;
+    text-align: center;
+    font-size: 18px;
+    font-family: Inter;
+
+    border-radius: 2px;
+    border: none;
+    background: #FFF;
+    padding: 14px 0;
+    transition: opacity 0.1s linear;
+}
+
+.form__submit:hover {
+    opacity: 0.85;
+}
+
+@media screen and (max-width: 619px) {
+    .form__submit {
+        margin: 174px 0 0;
+        font-size: 16px;
+    }
+}

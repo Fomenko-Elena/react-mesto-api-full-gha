@@ -1,0 +1,15 @@
+.dialog__header {
+    padding: 0 0 20px;
+    margin: 0;
+
+    font-size: 24px;
+    font-family: Inter;
+    font-weight: 900;
+}
+
+@media screen and (max-width: 619px) {
+    .dialog__header {
+        font-size: 20px;
+        padding: 0 0 16px;
+    }    
+}

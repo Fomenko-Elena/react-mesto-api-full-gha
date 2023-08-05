@@ -1,0 +1,5 @@
+.popup__image-preview {
+    margin: 0;
+    padding: 0;
+    max-width: min-content;
+}
