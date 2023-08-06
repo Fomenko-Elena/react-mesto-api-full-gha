@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { MongoServerError } = require('mongodb');
+const { MongoServerError } = require('mongoose').mongo;
 const User = require('../models/user');
 const {
   noVersionKeyProjection,
