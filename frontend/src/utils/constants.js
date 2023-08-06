@@ -1,5 +1,4 @@
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
-console.log(process.env);
 
 export const apiSettings = {
     baseUrl: apiUrl,
