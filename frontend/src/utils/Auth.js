@@ -35,7 +35,11 @@ class Auth {
     }
 
     _fetch(relativePath, options = null) {
-        return fetch(this._getUrl(relativePath), options)
+        const resultOptions = {
+            credentials: authSettings.credentials,
+            ...options
+        };
+        return fetch(this._getUrl(relativePath), resultOptions)
             .then(result => {
                 if (result.ok) return result.json();
                 return Promise.reject(`Ошибка: ${result.status}`);

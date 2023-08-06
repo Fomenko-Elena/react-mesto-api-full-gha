@@ -46,7 +46,8 @@ class Api {
     _fetch(relativePath, options = null) {
         const resultOptions = Object.assign(
             {
-                headers: this.options.headers
+                headers: this.options.headers,
+                credentials: this.options.credentials,
             },
             options);
 

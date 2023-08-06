@@ -1,13 +1,17 @@
+const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+console.log(process.env);
+
 export const apiSettings = {
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-65',
+    baseUrl: apiUrl,
     headers: {
-        authorization: '9afef1e9-c180-4844-bf4b-4960d997f13a',
         'Content-Type': 'application/json'
-    }
+    },
+    credentials: 'include',
 }
 
 export const authSettings = {
-    baseUrl: 'https://auth.nomoreparties.co'
+    baseUrl: apiUrl,
+    credentials: 'include',
 }
 
 export const noUser = {
