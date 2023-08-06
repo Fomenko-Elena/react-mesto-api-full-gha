@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 51.250.80.214
+IP 51.250.80.214
 
 Frontend https://helen-fomenko.nomoreparties.co
 
