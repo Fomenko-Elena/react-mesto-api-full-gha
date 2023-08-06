@@ -5,12 +5,12 @@
   
 Пожалуйста, прикрепите в это описание ссылку на сайт, размещенный на Яндекс.Облаке.
 
-Адрес репозитория: https://github.com/...
+Адрес репозитория: https://github.com/Fomenko-Elena/react-mesto-api-full-gha
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 51.250.80.214
 
-Frontend https://...
+Frontend https://helen-fomenko.nomoreparties.co
 
-Backend https://...
+Backend https://api.helen-fomenko.nomoreparties.co
