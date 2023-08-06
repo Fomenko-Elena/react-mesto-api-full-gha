@@ -17,6 +17,7 @@ const {
   requestLogger,
   errorLogger,
 } = require('./middlewares/logger');
+const { crachTest } = require('./controllers/crashTest');
 
 const {
   PORT = 3000,
@@ -34,6 +35,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(requestLogger);
 app.use(cors);
+
+app.get('/crash-test', crachTest);
 
 app.post(
   '/signin',
