@@ -8,6 +8,7 @@ const { JoiHelper } = require('./utils/utils');
 const {
   addUser,
   login,
+  logoff,
 } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 const otherErrors = require('./middlewares/errors');
@@ -61,6 +62,11 @@ app.post(
     }),
   }),
   addUser,
+);
+
+app.post(
+  '/signout',
+  logoff,
 );
 
 app.use(auth);

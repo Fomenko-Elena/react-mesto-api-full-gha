@@ -123,3 +123,7 @@ module.exports.login = (req, res, next) => {
     })
     .catch(next);
 };
+
+module.exports.logoff = (req, res) => res
+  .clearCookie(COOKIE_NAME)
+  .send({ message: 'Сессия завершена' });

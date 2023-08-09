@@ -25,10 +25,18 @@ class Auth {
         })
     }
 
-    getUser(token) {
+    signOut() {
+        return this._fetch('/signout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+
+    getUser() {
         return this._fetch('/users/me', {
             headers: {
-                authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         })

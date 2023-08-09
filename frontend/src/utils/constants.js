@@ -15,14 +15,8 @@ export const authSettings = {
 
 export const noUser = {
     _id: 0,
+    email: '',
     name: '',
     about: '',
     avatar: ''
 }
-
-export const noAuthUser = {
-    _id: 0,
-    email: ''
-}
-
-export const tokenName = 'token'

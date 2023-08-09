@@ -8,7 +8,7 @@ import ImagePopup from './ImagePopup'
 import { api } from "./../utils/Api";
 import { logErrorHandler } from "../utils/utils";
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
-import { noAuthUser, noUser, tokenName } from '../utils/constants'
+import { noUser } from '../utils/constants'
 import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup'
@@ -31,43 +31,25 @@ function App() {
     const [infoTooltipText, setInfoTooltipText] = useState("")
     const [infoTooltipSuccess, setInfoTooltipSuccess] = useState(false)
 
-    const [currentAuthUser, setCurrentAuthUser] = useState(noAuthUser)
-
     const navigate = useNavigate()
 
     useEffect(() => {
-        const token = localStorage.getItem(tokenName);
-        if (token)  {
-            auth
-                .getUser(token)
-                .then(({data}) => {
-                    signIn({
-                        token: token,
-                        ...data
-                    })
-                    navigate('/', { replace: true })
-                })
-                .catch((error) => {
-                    logErrorHandler(error)
-                    signOut()
-                })
-        }
+        auth
+            .getUser()
+            .then((data) => {
+                setCurrentUser(data);
+                navigate('/', { replace: true })
+            })
+            .catch(logErrorHandler)
     }, [])
 
     useEffect(() => {
-        if (currentAuthUser === noAuthUser) return;
-
-        Promise
-            .all([
-                api.getUser(),
-                api.getInitialCards()
-            ])
-            .then(([user, initialCards]) => {
-                setCurrentUser(user);
-                setCards(initialCards);
-            })
-            .catch(logErrorHandler)        
-    }, [currentAuthUser]);
+        if (currentUser === noUser) return;
+        api
+            .getInitialCards()
+            .then((initialCards) => setCards(initialCards))
+            .catch(logErrorHandler);
+    }, [currentUser]);
 
     function closeAllPopups() {
         setAddPlacePopupOpen(false);
@@ -147,18 +129,13 @@ function App() {
     function handleRegister(registrationData) {
         auth
             .signUp(registrationData)
-            .then(({data}) => {
+            .then((userData) => {
                 return auth
                     .signIn(registrationData)
-                    .then(({token}) => {
-                        return {
-                            token: token,
-                            ...data
-                        }
-                    })
+                    .then(() => userData)
             })
             .then((userData) => {
-                signIn(userData)
+                setCurrentUser(userData);
                 navigate('/', { replace: true })
                 showSuccessRegistrationTooltip()
             })
@@ -171,14 +148,11 @@ function App() {
     function handleLogin(loginData) {
         auth
             .signIn(loginData)
-            .then(({token}) => {
+            .then(() => {
                 return auth
-                    .getUser(token)
-                    .then(({data}) => {
-                        signIn({
-                            token: token,
-                            ...data
-                        })
+                    .getUser()
+                    .then((userData) => {
+                        setCurrentUser(userData)
                         navigate('/', { replace: true })
                     })
             })
@@ -189,19 +163,13 @@ function App() {
     }
 
     function handeSignOut() {
-        signOut();
-        navigate('/sign-in', { replace: true })
-    }
-
-    function signOut() {
-        localStorage.removeItem(tokenName)
-        setCurrentAuthUser(noAuthUser)
-    }
-
-    function signIn(userData) {
-        const { token, ...authUserData } = userData
-        localStorage.setItem(tokenName, token)
-        setCurrentAuthUser(authUserData)
+        auth
+            .signOut()
+            .then(() => {
+                setCurrentUser(noUser);
+                navigate('/sign-in', { replace: true });
+            })
+            .catch(logErrorHandler);
     }
 
     function showFailureToolip() {
@@ -220,7 +188,7 @@ function App() {
         <CurrentUserContext.Provider value={currentUser}>
             <div className="page">
                 <Header
-                    email={currentAuthUser.email}
+                    email={currentUser.email}
                     onSignOut={handeSignOut}
                 />
 
@@ -229,7 +197,7 @@ function App() {
                         path="/"
                         element={
                             <ProtectedRouteElement
-                                loggedIn={currentAuthUser !== noAuthUser}
+                                loggedIn={currentUser !== noUser}
                                 component={Main}
                                 cards={cards}   
                                 onEditAvatar={() => setEditAvatarPopupOpen(true)}
