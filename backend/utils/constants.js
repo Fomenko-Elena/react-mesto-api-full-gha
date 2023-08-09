@@ -23,7 +23,7 @@ module.exports.COOKIE_OPTIONS = {
   httpOnly: true,
   sameSite: 'strict',
   path: '/',
-  maxAge: 60 * 60 * 24 * 7,
+  maxAge: 60 * 60 * 24 * 7 * 1000,
   domain: COOKIE_DOMAIN || null,
 };
 
