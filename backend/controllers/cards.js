@@ -1,4 +1,5 @@
 const Card = require('../models/card');
+const { HTTP_CREATED } = require('../utils/constants');
 const { NotFoundError, ForbiddenError } = require('../utils/errors');
 const {
   noVersionKeyProjection,
@@ -22,7 +23,10 @@ module.exports.addCard = (req, res, next) => {
     .create({ name, link, owner: _id })
     .then((card) => card
       .populate(['owner', 'likes'])
-      .then((populatedCard) => res.send(populatedCard.toJSON(noVersionKeyOptions))))
+      .then((populatedCard) => {
+        const result = populatedCard.toJSON(noVersionKeyOptions);
+        res.status(HTTP_CREATED).send(result);
+      }))
     .catch(next);
 };
 

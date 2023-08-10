@@ -12,6 +12,7 @@ const {
   JWT_OPTIONS,
   COOKIE_OPTIONS,
   COOKIE_NAME,
+  HTTP_CREATED,
 } = require('../utils/constants');
 const {
   NotFoundError,
@@ -55,10 +56,11 @@ module.exports.addUser = (req, res, next) => {
       name, about, avatar, email, password: hash,
     }))
     .then((user) => {
-      res.send(user.toJSON({
+      const result = user.toJSON({
         useProjection: true,
         ...noVersionKeyOptions,
-      }));
+      });
+      res.status(HTTP_CREATED).send(result);
     })
     .catch((error) => {
       if (error instanceof MongoServerError && error.code === 11000) {

@@ -4,6 +4,8 @@ module.exports.DEFAULT_USER_NAME = 'Жак-Ив Кусто';
 module.exports.DEFAULT_USER_ABOUT = 'Исследователь';
 module.exports.DEFAULT_USER_AVATAR = 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png';
 
+module.exports.HTTP_CREATED = 201;
+
 const {
   NODE_ENV,
   JWT_SECRET,
